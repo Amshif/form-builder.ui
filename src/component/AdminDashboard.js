@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../utils/constants";
 
 const AdminDashboard = () => {
-  const [forms, setForms] = useState([]); // Initialize with an empty array
+  const [forms, setForms] = useState([]); 
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -29,9 +29,9 @@ const AdminDashboard = () => {
       }
 
       const data = await response.json();
-      console.log("API Response:", data); // Debugging
+      console.log("API Response:", data); 
 
-      // Use `data` as is or `data.forms` depending on API response
+     
       setForms(Array.isArray(data) ? data : data.forms || []);
     } catch (err) {
       console.error("Error fetching forms:", err.message);
@@ -49,6 +49,18 @@ const AdminDashboard = () => {
 
   const handleViewForm = (id) => {
     navigate(`/admin/view-form/${id}`);
+  };
+
+  const handleCopyLink = (formId) => {
+    const link = `http://localhost:3000/form/${formId}`;
+    navigator.clipboard
+      .writeText(link)
+      .then(() => {
+        alert("Link copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Error copying link:", err.message);
+      });
   };
 
   return (
@@ -71,12 +83,20 @@ const AdminDashboard = () => {
               className="list-group-item d-flex justify-content-between align-items-center"
             >
               {form.title}
-              <button
-                onClick={() => handleViewForm(form._id)}
-                className="btn btn-sm btn-outline-primary"
-              >
-                View
-              </button>
+              <div className="ms-auto">
+                <button
+                  onClick={() => handleViewForm(form._id)}
+                  className="btn btn-sm btn-outline-primary me-2"
+                >
+                  View
+                </button>
+                <button
+                  onClick={() => handleCopyLink(form._id)}
+                  className="btn btn-sm btn-outline-secondary"
+                >
+                  Copy Link
+                </button>
+              </div>
             </div>
           ))}
         </div>
