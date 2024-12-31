@@ -52,7 +52,7 @@ const AdminDashboard = () => {
   };
 
   const handleCopyLink = (formId) => {
-    const link = `http://localhost:3000/form/${formId}`;
+    const link = `https://form-builder-ui-sigma.vercel.app/form/${formId}`;
     navigator.clipboard
       .writeText(link)
       .then(() => {
