@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../utils/constants";
+import Header from "./Header";
 
 const AdminDashboard = () => {
   const [forms, setForms] = useState([]); 
@@ -63,8 +64,11 @@ const AdminDashboard = () => {
       });
   };
 
+  const userName = localStorage.getItem("username");
+
   return (
     <div className="container mt-5">
+     <Header title={`Hello, ${userName}`} />
       <h1 className="text-center mb-4">Admin Dashboard</h1>
       <div className="text-center mb-4">
         <button onClick={handleCreateForm} className="btn btn-primary">

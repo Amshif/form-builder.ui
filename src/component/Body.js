@@ -6,6 +6,7 @@ import CreateForm from "./AdminCreateForm";
 import SubmitForm from "./SubmitForm";
 import ViewForm from "./ViewForms";
 import ProtectedRoute from "./ProtectedRoute"; 
+import PrivateRoute from "./PrivateRoutes";
 import { createBrowserRouter, RouterProvider } from "react-router";
 
 const Body = () => {
@@ -49,9 +50,9 @@ const Body = () => {
     {
       path: "/form/:formId",
       element: (
-        <ProtectedRoute>
+        <PrivateRoute>
           <SubmitForm />
-        </ProtectedRoute>
+        </PrivateRoute>
       ),
     },
   ]);

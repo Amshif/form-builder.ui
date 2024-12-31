@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { API_BASE_URL } from "../utils/constants";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSigninForm, setisSigninForm] = useState(true);
@@ -12,6 +12,7 @@ const Login = () => {
   const name = useRef(null);
 
   const navigate = useNavigate();
+
 
 
   function toggleForm() {
@@ -47,14 +48,23 @@ const Login = () => {
       if (isSigninForm) {
         const { token, user } = data;
         localStorage.setItem("token", token);
-        localStorage.setItem("userid", user.id )
+        localStorage.setItem("userid", user.id );
+        localStorage.setItem("username", user.name );
         setSuccessMessage(`Welcome back, ${user.name}!`);
         console.log("Token stored:", token);
 
         if (user.role === "admin") {
           navigate("/admin/dashboard");
         } else {
-          navigate("/user/form");
+          const redirectTo = localStorage.getItem("redirectTo");
+
+          if (redirectTo) {
+            
+            localStorage.removeItem("redirectTo");
+            navigate(redirectTo);
+          } else {
+            navigate("/user/form");
+          }
         }
 
       } else {
