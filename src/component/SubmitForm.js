@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../utils/constants";
 
+
 const SubmitForm = () => {
   const { formId } = useParams();
   const [form, setForm] = useState(null);
@@ -69,7 +70,7 @@ const SubmitForm = () => {
   
       const result = await response.json();
       setMessage(result.message);
-      setTimeout(() => navigate("/"), 2000);
+      setTimeout(() => navigate("/user/form"), 2000);
     } catch (error) {
       console.error("Error submitting the form:", error.message);
     }
