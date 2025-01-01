@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_BASE_URL, FORM_URL } from "../utils/constants";
+import { API_BASE_URL} from "../utils/constants";
 import Header from "./Header";
 
 const AdminDashboard = () => {
@@ -53,7 +53,7 @@ const AdminDashboard = () => {
   };
 
   const handleCopyLink = (formId) => {
-    const link = `${FORM_URL}/form/${formId}`;
+    const link = `https://form-builder-ui-sigma.vercel.app/form/${formId}`;
     navigator.clipboard
       .writeText(link)
       .then(() => {
